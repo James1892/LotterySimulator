@@ -64,6 +64,7 @@ def calculateWinnings(mathchedNumbers, matchedLuckystars):
         return 0
 
 
+
 def main():
     amountOfGames = int(input("How many games do you want to simulate? "))
     numTickets = amountOfGames  # The number of tickets you want to generate and check
@@ -76,8 +77,7 @@ def main():
 
     # Generate and check the numbers for each ticket
     for i in range(numTickets):
-        randomNumbers, randomLuckyStars = generateResults()# Generates the numbers for each game
-
+        randomNumbers, randomLuckyStars = generateResults()  # Generates the numbers for each game
 
         matchedNumbers = len(set(playersNumbers).intersection(randomNumbers))
         matchedLuckystars = len(set(playerLuckyStars).intersection(randomLuckyStars))
@@ -88,21 +88,27 @@ def main():
         if (matchedNumbers, matchedLuckystars) == (5, 2):
             jackpotCount += 1
 
-        if matchedNumbers > 0 or matchedLuckystars > 0:
+        if winnings > 0:
             wins += 1
 
-        print(f"Game Number: {i+1}")
-        print("Player Balls:", ", ".join(map(str,playersNumbers)),"Lucky Stars:", ", ".join(map(str, playerLuckyStars)))
-        print("Result Balls:", ", ".join(map(str, randomNumbers)),"Lucky Stars:", ", ".join(map(str, randomLuckyStars)))
+        # Determine the color based on whether the game is a winning game
+        if winnings > 0:
+            colourCode = "\033[32m"  # Green color for winning games
+        else:
+            colourCode = "\033[0m"   # Reset color to default
+
+        print()
+        print(f"{colourCode}Game Number: {i+1}")
+        print("Player Balls:", ", ".join(map(str, playersNumbers)), "Lucky Stars:", ", ".join(map(str, playerLuckyStars)))
+        print("Result Balls:", ", ".join(map(str, randomNumbers)), "Lucky Stars:", ", ".join(map(str, randomLuckyStars)))
         print(f"Winnings: £{winnings:.2f}")
-        print()  # Print an empty line for better readability
+        print("\033[0m")  # Reset colour after printing
 
-
-        locale.setlocale(locale.LC_ALL, 'en_GB.UTF-8')
+    locale.setlocale(locale.LC_ALL, 'en_GB.UTF-8')
     print("----------------------------------------------------------------")
     print("                          Results")
     print("----------------------------------------------------------------")
-        
+
     print(f"Number of Games:                               {numTickets}")
     print(f"Total 5 numbers 2 luckyStars wins:             {jackpotCount}")
     print(f"Number of wins:                                {wins}")
@@ -111,6 +117,3 @@ def main():
     print(f"Cost/winnings offset:                          {locale.currency(totalWinnings - totalCost)}")
 
 main()
-
-
-
