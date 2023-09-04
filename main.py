@@ -93,7 +93,7 @@ def main():
             wins += 1
 
         if winnings > highestPayout:
-            maxPayout = winnings 
+            highestPayout = winnings 
 
         # Determine the color based on whether the game is a winning game
         if winnings > 0:
@@ -116,7 +116,7 @@ def main():
     print(f"Number of Games:                               {numTickets}")
     print(f"Total 5 numbers 2 luckyStars wins:             {jackpotCount}")
     print(f"Number of wins:                                {wins}")
-    print(f"Highest payout:                                {locale.currency(maxPayout)}")
+    print(f"Highest payout:                                {locale.currency(highestPayout)}")
     print(f"Total Cost of tickets:                         {locale.currency(totalCost)}")
     print(f"Total winnings:                                {locale.currency(totalWinnings)}")
     print(f"Cost/winnings offset:                          {locale.currency(totalWinnings - totalCost)}")
